@@ -1,105 +1,71 @@
-/*
-    MIDNIGHT GARDEN
-
-    Sayfa açıldığında:
-    1. Gövde büyür
-    2. Yapraklar çıkar
-    3. Çiçek tomurcuğu belirir
-    4. Yapraklar sırayla açılır
-    5. Çiçeğin merkezi oluşur
-    6. Ateş böcekleri hareket eder
-*/
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /*
-        İlk yükleme sınıfını kaldırıyoruz.
-        CSS animasyonları bundan sonra aktif.
-    */
-
-    setTimeout(() => {
-
-        document.body.classList.remove("not-loaded");
-        document.body.classList.add("loaded");
-
-    }, 100);
+    document.body.classList.add("ready");
 
 
     /*
-        Mobil cihazlarda kaydırmayı engelle.
+        Her küçük bitkiye hafif farklı
+        animasyon süresi veriyoruz.
     */
 
-    document.addEventListener(
-        "touchmove",
-        event => {
-            event.preventDefault();
-        },
-        {
-            passive: false
-        }
-    );
+    const plants =
+        document.querySelectorAll(".plant");
 
+    plants.forEach((plant, index) => {
 
-    /*
-        Çiçeklerin animasyonu bittikten sonra
-        çok hafif bir canlılık veriyoruz.
-    */
+        const stem =
+            plant.querySelector(".stem");
 
-    const flowers =
-        document.querySelectorAll(".flower");
+        const bloom =
+            plant.querySelector(".small-bloom");
 
-    flowers.forEach((flower, index) => {
+        const duration =
+            1.8 + (index % 4) * .18;
 
-        flower.addEventListener(
-            "animationend",
-            event => {
+        const delay =
+            .45 + index * .12;
 
-                if (
-                    event.animationName !==
-                    "bloomAppear"
-                ) {
-                    return;
-                }
+        stem.style.animationDuration =
+            `${duration}s`;
 
-                /*
-                    Her çiçeğe farklı zamanlama.
-                */
+        stem.style.animationDelay =
+            `${delay}s`;
 
-                flower.style.setProperty(
-                    "--flower-delay",
-                    `${index * 0.35}s`
-                );
-
-            }
-        );
-
+        bloom.style.animationDelay =
+            `${delay + 1.55}s`;
     });
 
 
     /*
-        Ateş böceklerine küçük rastgele
-        hareket farklılıkları.
+        Ateş böcekleri birbirinden farklı
+        hareket etsin.
     */
 
     const fireflies =
-        document.querySelectorAll(".firefly");
+        document.querySelectorAll(".fireflies i");
 
-    fireflies.forEach((firefly, index) => {
+    fireflies.forEach((fly, index) => {
 
         const duration =
-            4.5 +
-            Math.random() * 3;
+            4.5 + Math.random() * 3;
 
         const delay =
             Math.random() * 3;
 
-        firefly.style.animationDuration =
+        fly.style.animationDuration =
             `${duration}s`;
 
-        firefly.style.animationDelay =
+        fly.style.animationDelay =
             `${delay}s`;
+    });
 
+
+    /*
+        Sayfa yüklenirken hafif fade-in.
+    */
+
+    requestAnimationFrame(() => {
+        document.body.classList.add("loaded");
     });
 
 });
