@@ -1,98 +1,218 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no"
     >
 
-    <title>Bloom</title>
+    <title>Midnight Garden</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="not-loaded">
 
-<div class="scene">
+    <main class="scene">
 
-    <!-- Gökyüzü -->
-    <div class="sky"></div>
+        <!-- GECE -->
+        <div class="night"></div>
 
-    <!-- Ay -->
-    <div class="moon"></div>
-
-    <!-- Uzak ışık -->
-    <div class="ambient-light"></div>
-
-    <!-- Küçük ateş böcekleri -->
-    <div class="firefly firefly-1"></div>
-    <div class="firefly firefly-2"></div>
-    <div class="firefly firefly-3"></div>
-    <div class="firefly firefly-4"></div>
-    <div class="firefly firefly-5"></div>
-    <div class="firefly firefly-6"></div>
-
-    <!-- Zemin -->
-    <div class="ground"></div>
-
-    <!-- Çimenler -->
-    <div class="grass"></div>
-
-    <!-- ÇİÇEK -->
-    <div class="flower">
-
-        <!-- Gövde -->
-        <div class="stem"></div>
-
-        <!-- Yapraklar -->
-        <div class="leaf leaf-left">
-            <span></span>
+        <!-- AY -->
+        <div class="moon">
+            <div class="moon-crater crater-1"></div>
+            <div class="moon-crater crater-2"></div>
+            <div class="moon-crater crater-3"></div>
         </div>
 
-        <div class="leaf leaf-right">
-            <span></span>
+        <!-- AURORA -->
+        <div class="aurora aurora-1"></div>
+        <div class="aurora aurora-2"></div>
+
+        <!-- YILDIZLAR -->
+        <div class="stars"></div>
+
+        <!-- UZAK ÇİMENLER -->
+        <div class="background-grass">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
+            <span></span><span></span>
         </div>
 
-        <!-- Çiçek başı -->
-        <div class="flower-head">
 
-            <!-- Dış yapraklar -->
-            <div class="petal outer p1"></div>
-            <div class="petal outer p2"></div>
-            <div class="petal outer p3"></div>
-            <div class="petal outer p4"></div>
-            <div class="petal outer p5"></div>
-            <div class="petal outer p6"></div>
-            <div class="petal outer p7"></div>
-            <div class="petal outer p8"></div>
+        <!-- =========================
+             ÇİÇEK BAHÇESİ
+        ========================== -->
 
-            <!-- Orta yapraklar -->
-            <div class="petal middle m1"></div>
-            <div class="petal middle m2"></div>
-            <div class="petal middle m3"></div>
-            <div class="petal middle m4"></div>
-            <div class="petal middle m5"></div>
-            <div class="petal middle m6"></div>
+        <section class="garden">
 
-            <!-- İç yapraklar -->
-            <div class="inner-petal i1"></div>
-            <div class="inner-petal i2"></div>
-            <div class="inner-petal i3"></div>
-            <div class="inner-petal i4"></div>
+            <!-- ARKA ÇİÇEK -->
+            <div class="flower flower-small flower-back-left">
 
-            <!-- Çiçeğin merkezi -->
-            <div class="flower-center">
-                <div class="center-light"></div>
+                <div class="stem"></div>
+
+                <div class="leaf leaf-left"></div>
+
+                <div class="bloom">
+                    <i class="petal p1"></i>
+                    <i class="petal p2"></i>
+                    <i class="petal p3"></i>
+                    <i class="petal p4"></i>
+                    <i class="petal p5"></i>
+                    <i class="petal p6"></i>
+
+                    <div class="flower-core"></div>
+                </div>
+
             </div>
 
-        </div>
 
-    </div>
+            <!-- ARKA SAĞ ÇİÇEK -->
+            <div class="flower flower-small flower-back-right">
 
-</div>
+                <div class="stem"></div>
 
-<script src="script.js"></script>
+                <div class="leaf leaf-right"></div>
+
+                <div class="bloom">
+                    <i class="petal p1"></i>
+                    <i class="petal p2"></i>
+                    <i class="petal p3"></i>
+                    <i class="petal p4"></i>
+                    <i class="petal p5"></i>
+                    <i class="petal p6"></i>
+
+                    <div class="flower-core"></div>
+                </div>
+
+            </div>
+
+
+            <!-- ANA ÇİÇEK -->
+            <div class="flower flower-main">
+
+                <div class="stem"></div>
+
+                <div class="leaf leaf-left"></div>
+                <div class="leaf leaf-right"></div>
+
+                <div class="bloom">
+
+                    <!-- DIŞ YAPRAKLAR -->
+
+                    <i class="petal p1"></i>
+                    <i class="petal p2"></i>
+                    <i class="petal p3"></i>
+                    <i class="petal p4"></i>
+                    <i class="petal p5"></i>
+                    <i class="petal p6"></i>
+                    <i class="petal p7"></i>
+                    <i class="petal p8"></i>
+
+                    <!-- İÇ YAPRAKLAR -->
+
+                    <i class="inner-petal ip1"></i>
+                    <i class="inner-petal ip2"></i>
+                    <i class="inner-petal ip3"></i>
+                    <i class="inner-petal ip4"></i>
+                    <i class="inner-petal ip5"></i>
+
+                    <!-- MERKEZ -->
+
+                    <div class="flower-core">
+                        <span></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ÖN SOL ÇİÇEK -->
+            <div class="flower flower-front-left">
+
+                <div class="stem"></div>
+
+                <div class="leaf leaf-left"></div>
+
+                <div class="bloom">
+
+                    <i class="petal p1"></i>
+                    <i class="petal p2"></i>
+                    <i class="petal p3"></i>
+                    <i class="petal p4"></i>
+                    <i class="petal p5"></i>
+                    <i class="petal p6"></i>
+
+                    <div class="flower-core"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ÖN SAĞ ÇİÇEK -->
+            <div class="flower flower-front-right">
+
+                <div class="stem"></div>
+
+                <div class="leaf leaf-right"></div>
+
+                <div class="bloom">
+
+                    <i class="petal p1"></i>
+                    <i class="petal p2"></i>
+                    <i class="petal p3"></i>
+                    <i class="petal p4"></i>
+                    <i class="petal p5"></i>
+                    <i class="petal p6"></i>
+
+                    <div class="flower-core"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ÇİMENLER -->
+
+            <div class="grass-clump grass-1"></div>
+            <div class="grass-clump grass-2"></div>
+            <div class="grass-clump grass-3"></div>
+            <div class="grass-clump grass-4"></div>
+            <div class="grass-clump grass-5"></div>
+            <div class="grass-clump grass-6"></div>
+
+
+            <!-- ATEŞ BÖCEKLERİ -->
+
+            <div class="firefly f1"></div>
+            <div class="firefly f2"></div>
+            <div class="firefly f3"></div>
+            <div class="firefly f4"></div>
+            <div class="firefly f5"></div>
+            <div class="firefly f6"></div>
+            <div class="firefly f7"></div>
+            <div class="firefly f8"></div>
+
+        </section>
+
+
+        <!-- ÖN PLAN -->
+        <div class="foreground"></div>
+
+    </main>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
