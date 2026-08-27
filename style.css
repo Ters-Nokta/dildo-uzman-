@@ -12,9 +12,10 @@ body {
 }
 
 body {
-    background: #111916;
-    -webkit-tap-highlight-color: transparent;
+    background: #0d1714;
+    touch-action: none;
     user-select: none;
+    -webkit-user-select: none;
 }
 
 
@@ -24,41 +25,51 @@ body {
 
 .scene {
     position: relative;
+
     width: 100%;
     height: 100svh;
-    min-height: 520px;
+
+    min-height: 560px;
+
     overflow: hidden;
 
     background:
         linear-gradient(
-            to bottom,
-            #17231f 0%,
-            #182923 42%,
-            #14211c 70%,
-            #0d1512 100%
+            180deg,
+            #111c1d 0%,
+            #172722 48%,
+            #13211b 76%,
+            #0b1310 100%
         );
 }
 
 
 /* =========================================
-   GÖKYÜZÜ
+   GECE ATMOSFERİ
 ========================================= */
 
-.sky {
+.night {
     position: absolute;
     inset: 0;
 
     background:
+
         radial-gradient(
-            ellipse at 50% 25%,
-            rgba(190, 210, 193, 0.09),
+            ellipse at 50% 30%,
+            rgba(92, 117, 104, .13),
+            transparent 40%
+        ),
+
+        radial-gradient(
+            ellipse at 20% 65%,
+            rgba(48, 94, 67, .13),
             transparent 35%
         ),
 
         radial-gradient(
-            ellipse at 50% 65%,
-            rgba(70, 115, 78, 0.12),
-            transparent 45%
+            ellipse at 80% 70%,
+            rgba(67, 79, 102, .10),
+            transparent 35%
         );
 }
 
@@ -70,7 +81,12 @@ body {
 .moon {
     position: absolute;
 
-    width: clamp(60px, 15vw, 105px);
+    width: clamp(
+        68px,
+        18vw,
+        115px
+    );
+
     aspect-ratio: 1;
 
     top: 8%;
@@ -80,115 +96,276 @@ body {
 
     background:
         radial-gradient(
-            circle at 35% 30%,
-            #f0efdb,
-            #d9d9c0 65%,
-            #c2c5aa
+            circle at 32% 28%,
+            #f4f1d8,
+            #d9d8bd 68%,
+            #c5c6aa
         );
 
-    opacity: 0.62;
+    opacity: .65;
 
     box-shadow:
-        0 0 30px rgba(225, 230, 205, 0.10),
-        0 0 80px rgba(225, 230, 205, 0.05);
+        0 0 25px rgba(236, 235, 202, .10),
+        0 0 80px rgba(236, 235, 202, .06);
+
+    animation:
+        moonFloat 7s ease-in-out infinite;
+}
+
+.moon-crater {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(155, 158, 133, .18);
+}
+
+.crater-1 {
+    width: 20%;
+    height: 20%;
+    left: 24%;
+    top: 25%;
+}
+
+.crater-2 {
+    width: 13%;
+    height: 13%;
+    left: 58%;
+    top: 45%;
+}
+
+.crater-3 {
+    width: 16%;
+    height: 16%;
+    left: 40%;
+    top: 65%;
 }
 
 
 /* =========================================
-   ORTAM IŞIĞI
+   AURORA
 ========================================= */
 
-.ambient-light {
+.aurora {
     position: absolute;
 
-    width: 75vw;
-    height: 30vh;
+    width: 90%;
+    height: 32%;
 
-    left: 50%;
+    left: 5%;
+    top: 4%;
+
+    border-radius: 50%;
+
+    filter: blur(25px);
+
+    opacity: .14;
+
+    transform: rotate(-7deg);
+}
+
+.aurora-1 {
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #547e65,
+            transparent
+        );
+
+    animation:
+        auroraMove 9s ease-in-out infinite;
+}
+
+.aurora-2 {
+    top: 12%;
+
+    opacity: .08;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #7d6b85,
+            transparent
+        );
+
+    animation:
+        auroraMove 12s ease-in-out infinite reverse;
+}
+
+
+/* =========================================
+   YILDIZLAR
+========================================= */
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(235, 236, 210, .75) 1px,
+            transparent 1.5px
+        );
+
+    background-size:
+        73px 81px;
+
+    background-position:
+        12px 23px;
+
+    opacity: .25;
+
+    animation:
+        starMove 8s linear infinite;
+}
+
+
+/* =========================================
+   UZAK ÇİMENLER
+========================================= */
+
+.background-grass {
+    position: absolute;
+
+    left: 0;
     bottom: 8%;
 
-    transform: translateX(-50%);
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(77, 125, 82, 0.15),
-            transparent 70%
-        );
-
-    filter: blur(18px);
-}
-
-
-/* =========================================
-   ZEMİN
-========================================= */
-
-.ground {
-    position: absolute;
-
-    width: 130%;
-    height: 35%;
-
-    left: -15%;
-    bottom: -12%;
-
-    border-radius: 50% 50% 0 0;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 15%,
-            #20352a,
-            #111b17 68%
-        );
-}
-
-
-/* =========================================
-   ÇİMEN
-========================================= */
-
-.grass {
-    position: absolute;
-
     width: 100%;
-    height: 14%;
+    height: 17%;
+
+    opacity: .5;
+}
+
+.background-grass span {
+    position: absolute;
 
     bottom: 0;
-    left: 0;
 
-    opacity: 0.8;
+    width: 2px;
+    height: 25%;
 
-    background:
-        repeating-linear-gradient(
-            76deg,
-            transparent 0 16px,
-            #1d3528 17px 19px,
-            transparent 20px 33px
-        );
+    border-radius: 100%;
+
+    background: #284734;
+
+    transform-origin: bottom;
+
+    animation:
+        grassWave 5s ease-in-out infinite;
+}
+
+.background-grass span:nth-child(1) { left: 4%; height: 30%; }
+.background-grass span:nth-child(2) { left: 11%; height: 45%; }
+.background-grass span:nth-child(3) { left: 18%; height: 27%; }
+.background-grass span:nth-child(4) { left: 27%; height: 52%; }
+.background-grass span:nth-child(5) { left: 36%; height: 35%; }
+.background-grass span:nth-child(6) { left: 44%; height: 48%; }
+.background-grass span:nth-child(7) { left: 54%; height: 30%; }
+.background-grass span:nth-child(8) { left: 61%; height: 43%; }
+.background-grass span:nth-child(9) { left: 70%; height: 32%; }
+.background-grass span:nth-child(10) { left: 77%; height: 50%; }
+.background-grass span:nth-child(11) { left: 84%; height: 34%; }
+.background-grass span:nth-child(12) { left: 92%; height: 45%; }
+.background-grass span:nth-child(13) { left: 97%; height: 30%; }
+
+
+/* =========================================
+   BAHÇE
+========================================= */
+
+.garden {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
 }
 
 
 /* =========================================
-   ÇİÇEK
+   ÇİÇEK TEMEL
 ========================================= */
 
 .flower {
     position: absolute;
 
-    left: 50%;
-    bottom: 7%;
+    bottom: 8%;
 
-    width: min(66vw, 320px);
-    height: min(80vh, 680px);
+    width: 250px;
+    height: 550px;
+
+    transform-origin: bottom center;
+}
+
+
+/* ANA ÇİÇEK */
+
+.flower-main {
+    left: 50%;
 
     transform:
         translateX(-50%);
 
-    transform-origin: bottom center;
+    z-index: 8;
+}
 
-    animation:
-        gentleWind 7s ease-in-out infinite;
+
+/* ARKA ÇİÇEKLER */
+
+.flower-back-left {
+    left: 12%;
+
+    width: 170px;
+    height: 390px;
+
+    transform:
+        rotate(-7deg)
+        scale(.8);
+
+    z-index: 3;
+}
+
+.flower-back-right {
+    right: 9%;
+
+    width: 175px;
+    height: 410px;
+
+    transform:
+        rotate(7deg)
+        scale(.82);
+
+    z-index: 3;
+}
+
+
+/* ÖN ÇİÇEKLER */
+
+.flower-front-left {
+    left: 7%;
+
+    width: 190px;
+    height: 430px;
+
+    transform:
+        rotate(-8deg);
+
+    z-index: 10;
+}
+
+.flower-front-right {
+    right: 5%;
+
+    width: 190px;
+    height: 440px;
+
+    transform:
+        rotate(8deg);
+
+    z-index: 10;
 }
 
 
@@ -200,33 +377,35 @@ body {
     position: absolute;
 
     left: 50%;
-    bottom: 4%;
+    bottom: 0;
 
-    width: clamp(6px, 1.8vw, 9px);
-    height: 63%;
-
-    border-radius: 100px;
+    width: 8px;
+    height: 72%;
 
     transform:
         translateX(-50%)
-        rotate(-2deg);
+        rotate(-1deg);
 
-    transform-origin: bottom center;
+    transform-origin: bottom;
+
+    border-radius: 100px;
 
     background:
         linear-gradient(
             90deg,
-            #10271b,
-            #3e6b47,
-            #183324
+            #10261b,
+            #3b6744,
+            #173424
         );
 
     box-shadow:
-        1px 0 5px rgba(80, 130, 85, 0.15);
+        1px 0 5px rgba(79, 130, 83, .14);
+
+    transform-origin: bottom;
 
     animation:
-        stemAppear 2.3s
-        cubic-bezier(.18,.82,.2,1)
+        stemGrow 2.2s
+        cubic-bezier(.15,.8,.2,1)
         forwards;
 }
 
@@ -238,8 +417,8 @@ body {
 .leaf {
     position: absolute;
 
-    width: 39%;
-    height: 11%;
+    width: 38%;
+    height: 10%;
 
     border-radius:
         100% 0 100% 0;
@@ -247,47 +426,51 @@ body {
     background:
         linear-gradient(
             135deg,
-            #426f49,
-            #193324
+            #416d48,
+            #183225
         );
 
     opacity: 0;
 
     box-shadow:
-        inset 5px 4px 7px rgba(255,255,255,.05);
+        inset 5px 4px 8px rgba(255,255,255,.04);
 }
 
-.leaf span {
+.leaf::after {
+    content: "";
+
     position: absolute;
 
-    width: 70%;
+    left: 12%;
+    top: 50%;
+
+    width: 75%;
     height: 1px;
 
-    left: 10%;
-    top: 52%;
-
-    background: rgba(180, 210, 170, .13);
+    background: rgba(183, 210, 173, .16);
 
     transform: rotate(-15deg);
 }
 
 .leaf-left {
-    left: 4%;
-    bottom: 38%;
+    left: 2%;
+    bottom: 43%;
 
     transform:
-        rotate(-26deg)
+        rotate(-28deg)
         scale(0);
 
     animation:
-        leafLeft .9s
+        leafLeft
+        .9s
         cubic-bezier(.2,.8,.2,1)
-        1.45s forwards;
+        1.5s
+        forwards;
 }
 
 .leaf-right {
     right: 1%;
-    bottom: 30%;
+    bottom: 34%;
 
     transform:
         scaleX(-1)
@@ -295,9 +478,11 @@ body {
         scale(0);
 
     animation:
-        leafRight .9s
+        leafRight
+        .9s
         cubic-bezier(.2,.8,.2,1)
-        1.75s forwards;
+        1.8s
+        forwards;
 }
 
 
@@ -305,271 +490,290 @@ body {
    ÇİÇEK BAŞI
 ========================================= */
 
-.flower-head {
+.bloom {
     position: absolute;
 
-    width: min(52vw, 245px);
-    aspect-ratio: 1;
-
     left: 50%;
-    top: 17%;
+    top: 10%;
+
+    width: min(48vw, 230px);
+    aspect-ratio: 1;
 
     transform:
         translateX(-50%)
-        scale(.08);
+        scale(.05);
 
-    transform-origin: center bottom;
+    transform-origin:
+        center bottom;
 
     animation:
-        headAppear 1.3s
-        cubic-bezier(.18,.85,.2,1)
-        1.9s forwards;
+        bloomAppear
+        1.2s
+        cubic-bezier(.16,.84,.2,1)
+        2s
+        forwards;
 }
 
 
 /* =========================================
-   YAPRAK TEMELİ
+   PETALLER
 ========================================= */
 
-.petal,
-.inner-petal {
+.petal {
     position: absolute;
 
     left: 50%;
     top: 52%;
 
-    transform-origin: 50% 100%;
+    width: 35%;
+    height: 62%;
+
+    transform-origin:
+        50% 100%;
 
     border-radius:
         65% 35%
-        62% 38% /
+        60% 40% /
         72% 70%
         30% 28%;
 
     background:
         linear-gradient(
             145deg,
-            #e97c82 0%,
-            #bf4558 42%,
-            #8a293f 72%,
-            #641c32 100%
+            #e78489 0%,
+            #bd4658 42%,
+            #8b293f 75%,
+            #601d31 100%
         );
 
     box-shadow:
-        inset 4px 5px 8px rgba(255,255,255,.12),
-        inset -8px -10px 15px rgba(50,0,15,.20);
-}
-
-
-/* =========================================
-   DIŞ YAPRAKLAR
-========================================= */
-
-.outer {
-    width: 35%;
-    height: 63%;
-
-    animation:
-        outerOpen 1s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
+        inset 5px 5px 9px rgba(255,255,255,.12),
+        inset -9px -12px 18px rgba(50,0,15,.22);
 
     opacity: 0;
+
+    animation:
+        petalOpen
+        1s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
 }
+
+
+/* PETAL KONUM */
 
 .p1 {
     --r: 0deg;
-    animation-delay: 2.55s;
+    animation-delay: 2.65s;
 }
 
 .p2 {
     --r: 45deg;
-    animation-delay: 2.65s;
+    animation-delay: 2.75s;
 }
 
 .p3 {
     --r: 90deg;
-    animation-delay: 2.75s;
+    animation-delay: 2.85s;
 }
 
 .p4 {
     --r: 135deg;
-    animation-delay: 2.85s;
+    animation-delay: 2.95s;
 }
 
 .p5 {
     --r: 180deg;
-    animation-delay: 2.95s;
+    animation-delay: 3.05s;
 }
 
 .p6 {
     --r: 225deg;
-    animation-delay: 3.05s;
+    animation-delay: 3.15s;
 }
 
 .p7 {
     --r: 270deg;
-    animation-delay: 3.15s;
+    animation-delay: 3.25s;
 }
 
 .p8 {
     --r: 315deg;
-    animation-delay: 3.25s;
-}
-
-
-/* =========================================
-   ORTA YAPRAKLAR
-========================================= */
-
-.middle {
-    width: 31%;
-    height: 55%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ef8d91,
-            #c34a5b 48%,
-            #7b2439
-        );
-
-    opacity: 0;
-
-    animation:
-        middleOpen 1s
-        cubic-bezier(.2,.8,.2,1)
-        forwards;
-}
-
-.m1 {
-    --r: 25deg;
-    animation-delay: 3.25s;
-}
-
-.m2 {
-    --r: 85deg;
     animation-delay: 3.35s;
 }
 
-.m3 {
-    --r: 145deg;
-    animation-delay: 3.45s;
-}
-
-.m4 {
-    --r: 205deg;
-    animation-delay: 3.55s;
-}
-
-.m5 {
-    --r: 265deg;
-    animation-delay: 3.65s;
-}
-
-.m6 {
-    --r: 325deg;
-    animation-delay: 3.75s;
-}
-
 
 /* =========================================
-   İÇ YAPRAKLAR
+   İÇ PETALLER
 ========================================= */
 
 .inner-petal {
-    width: 25%;
-    height: 44%;
+    position: absolute;
+
+    left: 50%;
+    top: 53%;
+
+    width: 28%;
+    height: 49%;
+
+    border-radius:
+        65% 35%
+        62% 38% /
+        70% 70%
+        30% 30%;
+
+    transform-origin: 50% 100%;
 
     background:
         linear-gradient(
             145deg,
-            #f19a9b,
-            #c64c5e 50%,
-            #762237
+            #f09b9d,
+            #c64d5d 48%,
+            #76243a
         );
 
     opacity: 0;
 
     animation:
-        innerOpen .9s
+        innerPetalOpen
+        .9s
         cubic-bezier(.2,.8,.2,1)
         forwards;
 }
 
-.i1 {
+.ip1 {
     --r: 0deg;
-    animation-delay: 3.8s;
+    animation-delay: 3.45s;
 }
 
-.i2 {
-    --r: 90deg;
-    animation-delay: 3.9s;
+.ip2 {
+    --r: 72deg;
+    animation-delay: 3.55s;
 }
 
-.i3 {
-    --r: 180deg;
-    animation-delay: 4s;
+.ip3 {
+    --r: 144deg;
+    animation-delay: 3.65s;
 }
 
-.i4 {
-    --r: 270deg;
-    animation-delay: 4.1s;
+.ip4 {
+    --r: 216deg;
+    animation-delay: 3.75s;
+}
+
+.ip5 {
+    --r: 288deg;
+    animation-delay: 3.85s;
 }
 
 
 /* =========================================
-   ÇİÇEK MERKEZİ
+   MERKEZ
 ========================================= */
 
-.flower-center {
+.flower-core {
     position: absolute;
 
     left: 50%;
-    top: 55%;
+    top: 56%;
 
     width: 19%;
     aspect-ratio: 1;
-
-    border-radius: 50%;
 
     transform:
         translate(-50%,-50%)
         scale(0);
 
+    border-radius: 50%;
+
     background:
         radial-gradient(
-            circle at 35% 30%,
-            #f2d17a,
-            #c48734 45%,
-            #713b1d 75%,
-            #422016
+            circle at 32% 27%,
+            #f2d27d,
+            #c88935 45%,
+            #733b1c 74%,
+            #422116
         );
 
     box-shadow:
-        0 0 16px rgba(230,180,90,.18);
+        0 0 18px rgba(231, 180, 91, .20);
 
     animation:
-        centerAppear .7s
+        coreAppear
+        .7s
         ease
-        4.15s forwards;
+        4s
+        forwards;
 }
 
-.center-light {
+.flower-core span {
     position: absolute;
 
     width: 25%;
     height: 25%;
 
+    left: 23%;
     top: 18%;
-    left: 25%;
 
     border-radius: 50%;
 
-    background: rgba(255,240,180,.6);
+    background:
+        rgba(255,242,181,.65);
 
     filter: blur(2px);
 }
+
+
+/* =========================================
+   ÇİMEN KÜMELERİ
+========================================= */
+
+.grass-clump {
+    position: absolute;
+
+    bottom: 7%;
+
+    width: 90px;
+    height: 100px;
+
+    opacity: .7;
+}
+
+.grass-clump::before,
+.grass-clump::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 3px;
+    height: 80px;
+
+    background: #274a32;
+
+    border-radius: 100%;
+
+    transform-origin: bottom;
+}
+
+.grass-clump::before {
+    transform:
+        rotate(-25deg);
+}
+
+.grass-clump::after {
+    transform:
+        rotate(28deg);
+}
+
+.grass-1 { left: 2%; }
+.grass-2 { left: 22%; transform: scale(.7); }
+.grass-3 { left: 74%; transform: scale(.8); }
+.grass-4 { right: 0; transform: scale(.65); }
+.grass-5 { left: 37%; transform: scale(.5); }
+.grass-6 { right: 20%; transform: scale(.55); }
 
 
 /* =========================================
@@ -579,54 +783,60 @@ body {
 .firefly {
     position: absolute;
 
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
 
     border-radius: 50%;
 
-    background: #dedc9e;
+    background: #d9d99b;
 
     box-shadow:
-        0 0 9px rgba(235,230,150,.75);
+        0 0 10px rgba(238,235,159,.8);
 
     animation:
         fireflyFloat
-        5s ease-in-out infinite;
+        5s
+        ease-in-out
+        infinite;
 }
 
-.firefly-1 {
-    left: 16%;
-    top: 38%;
-}
+.f1 { left: 12%; top: 39%; }
+.f2 { left: 24%; top: 53%; animation-delay: 1.2s; }
+.f3 { left: 78%; top: 37%; animation-delay: 2s; }
+.f4 { left: 87%; top: 54%; animation-delay: .8s; }
+.f5 { left: 33%; top: 30%; animation-delay: 2.8s; }
+.f6 { left: 68%; top: 29%; animation-delay: 1.5s; }
+.f7 { left: 54%; top: 47%; animation-delay: 3.4s; }
+.f8 { left: 8%; top: 64%; animation-delay: 4s; }
 
-.firefly-2 {
-    left: 77%;
-    top: 45%;
-    animation-delay: 1.2s;
-}
 
-.firefly-3 {
-    left: 27%;
-    top: 59%;
-    animation-delay: 2.2s;
-}
+/* =========================================
+   ÖN PLAN
+========================================= */
 
-.firefly-4 {
-    left: 84%;
-    top: 28%;
-    animation-delay: .7s;
-}
+.foreground {
+    position: absolute;
 
-.firefly-5 {
-    left: 67%;
-    top: 65%;
-    animation-delay: 3s;
-}
+    z-index: 20;
 
-.firefly-6 {
-    left: 40%;
-    top: 30%;
-    animation-delay: 1.8s;
+    left: -10%;
+    bottom: -13%;
+
+    width: 120%;
+    height: 22%;
+
+    border-radius: 50% 50% 0 0;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 5%,
+            #16271e,
+            #0b120f 70%
+        );
+
+    opacity: .75;
+
+    pointer-events: none;
 }
 
 
@@ -634,14 +844,14 @@ body {
    ANİMASYONLAR
 ========================================= */
 
-@keyframes stemAppear {
+@keyframes stemGrow {
 
     from {
         height: 0;
     }
 
     to {
-        height: 63%;
+        height: 72%;
     }
 }
 
@@ -650,15 +860,17 @@ body {
 
     from {
         opacity: 0;
+
         transform:
-            rotate(-26deg)
+            rotate(-28deg)
             scale(0);
     }
 
     to {
         opacity: 1;
+
         transform:
-            rotate(-26deg)
+            rotate(-28deg)
             scale(1);
     }
 }
@@ -668,6 +880,7 @@ body {
 
     from {
         opacity: 0;
+
         transform:
             scaleX(-1)
             rotate(-28deg)
@@ -676,6 +889,7 @@ body {
 
     to {
         opacity: 1;
+
         transform:
             scaleX(-1)
             rotate(-28deg)
@@ -684,18 +898,20 @@ body {
 }
 
 
-@keyframes headAppear {
+@keyframes bloomAppear {
 
     from {
         opacity: 0;
+
         transform:
             translateX(-50%)
-            translateY(35px)
-            scale(.08);
+            translateY(30px)
+            scale(.05);
     }
 
     to {
         opacity: 1;
+
         transform:
             translateX(-50%)
             translateY(0)
@@ -704,7 +920,7 @@ body {
 }
 
 
-@keyframes outerOpen {
+@keyframes petalOpen {
 
     from {
         opacity: 0;
@@ -712,8 +928,8 @@ body {
         transform:
             translate(-50%,-100%)
             rotate(var(--r))
-            translateY(13%)
-            scale(.4);
+            translateY(15%)
+            scale(.35);
     }
 
     to {
@@ -728,7 +944,7 @@ body {
 }
 
 
-@keyframes middleOpen {
+@keyframes innerPetalOpen {
 
     from {
         opacity: 0;
@@ -737,30 +953,6 @@ body {
             translate(-50%,-100%)
             rotate(var(--r))
             translateY(8%)
-            scale(.45);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate(-50%,-100%)
-            rotate(var(--r))
-            translateY(-5%)
-            scale(1);
-    }
-}
-
-
-@keyframes innerOpen {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate(-50%,-100%)
-            rotate(var(--r))
-            translateY(5%)
             scale(.4);
     }
 
@@ -776,7 +968,7 @@ body {
 }
 
 
-@keyframes centerAppear {
+@keyframes coreAppear {
 
     from {
         transform:
@@ -792,90 +984,202 @@ body {
 }
 
 
-@keyframes gentleWind {
-
-    0%,
-    100% {
-        transform:
-            translateX(-50%)
-            rotate(-.5deg);
-    }
-
-    50% {
-        transform:
-            translateX(-50%)
-            rotate(.7deg);
-    }
-}
-
-
 @keyframes fireflyFloat {
 
     0%,
     100% {
-        opacity: .15;
-        transform: translate(0,0);
+        opacity: .12;
+
+        transform:
+            translate(0,0);
     }
 
     50% {
         opacity: 1;
-        transform: translate(8px,-20px);
+
+        transform:
+            translate(10px,-24px);
+    }
+}
+
+
+@keyframes grassWave {
+
+    0%,
+    100% {
+        transform:
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            rotate(4deg);
+    }
+}
+
+
+@keyframes moonFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(5px);
+    }
+}
+
+
+@keyframes auroraMove {
+
+    0%,
+    100% {
+        transform:
+            translateX(-5%)
+            rotate(-7deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateX(5%)
+            rotate(-4deg)
+            scale(1.08);
+    }
+}
+
+
+@keyframes starMove {
+
+    0%,
+    100% {
+        opacity: .18;
+    }
+
+    50% {
+        opacity: .32;
     }
 }
 
 
 /* =========================================
-   MOBİL
+   TELEFON OPTİMİZASYONU
 ========================================= */
 
-@media (max-width: 430px) {
+@media (max-width: 600px) {
 
-    .flower {
-        width: 70vw;
-        height: 79vh;
-        bottom: 7%;
-    }
-
-    .flower-head {
-        width: 56vw;
-        top: 16%;
+    .scene {
+        min-height: 0;
     }
 
     .moon {
-        right: 9%;
         top: 7%;
+        right: 9%;
     }
-}
-
-
-@media (max-height: 650px) {
 
     .flower {
-        height: 78vh;
-        bottom: 5%;
+        bottom: 7%;
     }
 
-    .flower-head {
-        top: 13%;
+    .flower-main {
+        width: 70vw;
+        height: 75vh;
+    }
+
+    .flower-back-left {
+        left: -2%;
+        width: 45vw;
+        height: 58vh;
+    }
+
+    .flower-back-right {
+        right: -2%;
+        width: 45vw;
+        height: 60vh;
+    }
+
+    .flower-front-left {
+        left: -9%;
+        width: 47vw;
+        height: 59vh;
+    }
+
+    .flower-front-right {
+        right: -9%;
+        width: 47vw;
+        height: 60vh;
+    }
+
+    .bloom {
+        width: 55vw;
+    }
+
+    .foreground {
+        bottom: -15%;
+        height: 23%;
     }
 }
 
 
-/* Çok küçük ekranlar */
+/* =========================================
+   ÇOK KÜÇÜK TELEFONLAR
+========================================= */
 
-@media (max-width: 350px) {
+@media (max-width: 360px) {
 
-    .flower {
-        width: 73vw;
+    .flower-main {
+        width: 74vw;
+        height: 73vh;
     }
 
-    .flower-head {
-        width: 58vw;
+    .flower-back-left,
+    .flower-back-right {
+        opacity: .7;
+    }
+
+    .flower-front-left,
+    .flower-front-right {
+        opacity: .85;
+    }
+
+    .moon {
+        width: 64px;
     }
 }
 
 
-/* Hareket azaltma */
+/* =========================================
+   KISA EKRANLAR
+========================================= */
+
+@media (max-height: 680px) {
+
+    .flower-main {
+        height: 76vh;
+    }
+
+    .flower-front-left,
+    .flower-front-right {
+        height: 58vh;
+    }
+
+    .flower-back-left,
+    .flower-back-right {
+        height: 56vh;
+    }
+
+    .bloom {
+        top: 8%;
+    }
+}
+
+
+/* =========================================
+   HAREKET AZALTMA
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -885,5 +1189,4 @@ body {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
     }
-}
-
+    }
