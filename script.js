@@ -1,16 +1,7 @@
-/* ==========================================
-   ÇİÇEK BAHÇESİ
-   Etkileşimler
-========================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const messageButton = document.getElementById("messageButton");
     const message = document.getElementById("message");
-
-    /* --------------------------------------
-       MESAJ
-    -------------------------------------- */
 
     let opened = false;
 
@@ -30,10 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* --------------------------------------
-       ATEŞBÖCEKLERİNİ HAFİF HAREKET ETTİR
-    -------------------------------------- */
-
     const fireflies = document.querySelectorAll(".fireflies span");
 
     fireflies.forEach((firefly) => {
@@ -49,10 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         firefly.style.animationDelay = `${delay}ms`;
     });
 
-
-    /* --------------------------------------
-       DOKUNMA / TIKLAMA PARILTISI
-    -------------------------------------- */
 
     document.addEventListener("pointerdown", (event) => {
 
@@ -71,10 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-/* ==========================================
-   ALTIN PARÇACIKLAR
-========================================== */
 
 function createGoldenParticles() {
 
@@ -142,10 +121,6 @@ function createGoldenParticles() {
 }
 
 
-/* ==========================================
-   TIKLAMA PARILTISI
-========================================== */
-
 function createTapGlow(x, y) {
 
     const glow = document.createElement("div");
@@ -191,10 +166,6 @@ function createTapGlow(x, y) {
     }, 700);
 }
 
-
-/* ==========================================
-   RANDOM
-========================================== */
 
 function random(min, max) {
     return Math.random() * (max - min) + min;
