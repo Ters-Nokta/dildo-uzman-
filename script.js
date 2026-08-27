@@ -1,142 +1,105 @@
 /*
-    BLOOM
-    Mobil öncelikli küçük atmosfer efektleri
+    MIDNIGHT GARDEN
+
+    Sayfa açıldığında:
+    1. Gövde büyür
+    2. Yapraklar çıkar
+    3. Çiçek tomurcuğu belirir
+    4. Yapraklar sırayla açılır
+    5. Çiçeğin merkezi oluşur
+    6. Ateş böcekleri hareket eder
 */
 
-const scene = document.querySelector(".scene");
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /*
+        İlk yükleme sınıfını kaldırıyoruz.
+        CSS animasyonları bundan sonra aktif.
+    */
+
+    setTimeout(() => {
+
+        document.body.classList.remove("not-loaded");
+        document.body.classList.add("loaded");
+
+    }, 100);
 
 
-// =========================================
-// DOKUNMA / EKRAN KONTROLÜ
-// =========================================
+    /*
+        Mobil cihazlarda kaydırmayı engelle.
+    */
 
-document.addEventListener(
-    "touchmove",
-    function (event) {
-        event.preventDefault();
-    },
-    {
-        passive: false
-    }
-);
-
-
-// =========================================
-// EKSTRA PARÇACIKLAR
-// =========================================
-
-const particleCount =
-    window.innerWidth < 600 ? 14 : 24;
-
-for (let i = 0; i < particleCount; i++) {
-
-    const particle =
-        document.createElement("div");
-
-    particle.className =
-        "floating-particle";
-
-    particle.style.left =
-        Math.random() * 100 + "%";
-
-    particle.style.top =
-        20 + Math.random() * 65 + "%";
-
-    particle.style.animationDelay =
-        Math.random() * 6 + "s";
-
-    particle.style.animationDuration =
-        5 + Math.random() * 5 + "s";
-
-    scene.appendChild(particle);
-}
+    document.addEventListener(
+        "touchmove",
+        event => {
+            event.preventDefault();
+        },
+        {
+            passive: false
+        }
+    );
 
 
-// =========================================
-// PARÇACIK CSS
-// =========================================
+    /*
+        Çiçeklerin animasyonu bittikten sonra
+        çok hafif bir canlılık veriyoruz.
+    */
 
-const style =
-    document.createElement("style");
+    const flowers =
+        document.querySelectorAll(".flower");
 
-style.textContent = `
+    flowers.forEach((flower, index) => {
 
-.floating-particle {
+        flower.addEventListener(
+            "animationend",
+            event => {
 
-    position: absolute;
+                if (
+                    event.animationName !==
+                    "bloomAppear"
+                ) {
+                    return;
+                }
 
-    width: 2px;
-    height: 2px;
+                /*
+                    Her çiçeğe farklı zamanlama.
+                */
 
-    border-radius: 50%;
+                flower.style.setProperty(
+                    "--flower-delay",
+                    `${index * 0.35}s`
+                );
 
-    background: rgba(205,215,165,.45);
-
-    box-shadow:
-        0 0 7px
-        rgba(220,220,160,.45);
-
-    pointer-events: none;
-
-    animation:
-        particleMove
-        ease-in-out
-        infinite;
-
-}
-
-@keyframes particleMove {
-
-    0% {
-
-        opacity: 0;
-
-        transform:
-            translate3d(0,20px,0)
-            scale(.5);
-
-    }
-
-    30% {
-
-        opacity: .7;
-
-    }
-
-    60% {
-
-        opacity: .3;
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate3d(12px,-45px,0)
-            scale(1.2);
-
-    }
-
-}
-
-`;
-
-document.head.appendChild(style);
-
-
-// =========================================
-// İLK AÇILIŞ
-// =========================================
-
-window.addEventListener(
-    "load",
-    () => {
-
-        document.body.classList.add(
-            "loaded"
+            }
         );
 
-    }
-);
+    });
+
+
+    /*
+        Ateş böceklerine küçük rastgele
+        hareket farklılıkları.
+    */
+
+    const fireflies =
+        document.querySelectorAll(".firefly");
+
+    fireflies.forEach((firefly, index) => {
+
+        const duration =
+            4.5 +
+            Math.random() * 3;
+
+        const delay =
+            Math.random() * 3;
+
+        firefly.style.animationDuration =
+            `${duration}s`;
+
+        firefly.style.animationDelay =
+            `${delay}s`;
+
+    });
+
+});
